@@ -6,8 +6,10 @@
   with glow accents. Focus rings and reduced-motion support.
 - Cloud persistence on Supabase (project `goshumgotgrholkacrpa`): every change
   saves to a shared team database; open windows sync live via realtime.
-- Team sign-in with email + 6-digit code (no passwords). Only emails added in
+- Team sign-in with emailed magic links (no passwords). Only emails added in
   the Supabase dashboard (Authentication → Users) can sign in.
+- Hosted on GitHub Pages so the team opens a URL instead of passing a file
+  around; the local file remains usable for development.
 - JSON export/import backup retained as an offline escape hatch; if the cloud
   is unreachable the app keeps working in memory and warns that saves are off.
 
