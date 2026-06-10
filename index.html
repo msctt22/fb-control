@@ -9,57 +9,93 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#16263a; --ink2:#2c4258; --paper:#eceee9; --card:#ffffff;
-    --line:#dde1da; --line2:#eceee9; --muted:#6b7780; --text:#1d2730;
-    --green:#3f7d5e; --green-soft:#e7efe9; --green-line:#bcd4c5;
-    --amber:#b9632f; --amber-soft:#f5e7dd; --amber-line:#e8c8b0;
-    --bev:#5a4a86; --bev-soft:#ece8f4; --bev-line:#ccc1e2;
-    --shadow:0 1px 2px rgba(22,38,58,.06),0 4px 16px rgba(22,38,58,.05);
+    --ink:#0d1b2e; --ink2:#324a63; --paper:#eef1f6; --card:rgba(255,255,255,.82);
+    --line:rgba(13,27,46,.09); --line2:rgba(13,27,46,.055); --muted:#5f7184; --text:#1b2735;
+    --green:#0e9d6f; --green-soft:#e0f4eb; --green-line:#b5e3cf;
+    --amber:#c0640f; --amber-soft:#fcefdf; --amber-line:#f0d2a9;
+    --bev:#6e57cc; --bev-soft:#efebfb; --bev-line:#d6cbf2;
+    --r-lg:22px; --r-md:14px; --r-sm:11px;
+    --glass-border:1px solid rgba(255,255,255,.7);
+    --shadow:0 1px 2px rgba(13,27,46,.04),0 10px 30px -10px rgba(13,27,46,.12);
+    --shadow-lift:0 2px 6px rgba(13,27,46,.06),0 18px 44px -14px rgba(13,27,46,.2);
   }
   *{box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
-  body{margin:0;background:var(--paper);color:var(--text);
-    font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.45}
+  body{margin:0;color:var(--text);
+    font-family:'Inter',system-ui,sans-serif;font-size:14px;line-height:1.5;
+    min-height:100vh;background:
+      radial-gradient(1000px 520px at 88% -140px,rgba(14,157,111,.14),transparent 60%),
+      radial-gradient(820px 540px at -160px 22%,rgba(110,87,204,.11),transparent 62%),
+      radial-gradient(900px 560px at 55% 115%,rgba(192,100,15,.08),transparent 60%),
+      linear-gradient(180deg,#f2f4f8,#e9ecf3);
+    background-attachment:fixed}
   .mono{font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums}
   h1,h2,h3{font-family:'Space Grotesk',sans-serif;margin:0;color:var(--ink)}
   button{font-family:inherit;cursor:pointer}
   input,select,textarea{font-family:inherit;font-size:14px}
+  :focus-visible{outline:2px solid var(--green);outline-offset:2px}
+  ::selection{background:var(--green-soft)}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  }
 
-  header{background:var(--ink);color:#fff;padding:18px 24px;
-    display:flex;align-items:baseline;gap:16px;flex-wrap:wrap}
-  header .brand{font-family:'Space Grotesk';font-weight:700;font-size:18px;
-    letter-spacing:.02em;color:#fff;display:flex;align-items:baseline;gap:10px}
-  header .brand small{font-weight:500;font-size:11px;letter-spacing:.18em;
-    text-transform:uppercase;color:#8fa6bd}
+  header{position:relative;overflow:hidden;color:#fff;padding:22px 28px;
+    display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+    background:linear-gradient(115deg,#0a1626 0%,#13283e 55%,#0d2133 100%)}
+  header::before,header::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+  header::before{width:520px;height:520px;top:-340px;right:-60px;
+    background:radial-gradient(circle,rgba(16,185,129,.32),transparent 65%)}
+  header::after{width:420px;height:420px;top:-270px;left:16%;
+    background:radial-gradient(circle,rgba(110,87,204,.28),transparent 65%)}
+  header>*{position:relative;z-index:1}
+  header .brand{font-family:'Space Grotesk';font-weight:700;font-size:19px;
+    letter-spacing:.01em;color:#fff;display:flex;align-items:baseline;gap:11px}
+  header .brand small{font-weight:500;font-size:10.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:#7e98b3}
   header .spacer{flex:1}
   header .io{display:flex;gap:8px}
-  header .io button{background:transparent;border:1px solid #3a516b;color:#cdd8e4;
-    border-radius:7px;padding:6px 11px;font-size:12px;font-weight:500}
-  header .io button:hover{border-color:#5b7796;color:#fff}
+  header .io button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);color:#d7e2ec;
+    border-radius:999px;padding:7px 15px;font-size:12px;font-weight:500;
+    transition:background .2s,border-color .2s,color .2s}
+  header .io button:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.34);color:#fff}
 
-  nav{background:var(--card);border-bottom:1px solid var(--line);
-    padding:0 16px;display:flex;gap:2px;overflow-x:auto;position:sticky;top:0;z-index:5}
-  nav button{background:none;border:none;padding:14px 16px;font-size:13px;
-    font-weight:600;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
-  nav button.active{color:var(--ink);border-bottom-color:var(--green)}
-  nav button:hover{color:var(--ink)}
+  nav{position:sticky;top:12px;z-index:20;display:flex;gap:4px;overflow-x:auto;
+    max-width:1180px;margin:18px auto 0;width:calc(100% - 28px);padding:6px;
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);
+    border:var(--glass-border);border-radius:999px;
+    box-shadow:0 1px 2px rgba(13,27,46,.05),0 12px 32px -12px rgba(13,27,46,.18);
+    scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  nav button{background:none;border:none;padding:9px 16px;font-size:13px;
+    font-weight:600;color:var(--muted);border-radius:999px;white-space:nowrap;
+    transition:color .2s,background .2s,box-shadow .2s}
+  nav button.active{color:#fff;background:linear-gradient(135deg,#16314b,#0d1b2e);
+    box-shadow:0 6px 16px -6px rgba(13,27,46,.45)}
+  nav button:hover:not(.active){color:var(--ink);background:rgba(13,27,46,.06)}
 
-  main{max-width:1180px;margin:0 auto;padding:24px 16px 80px}
+  main{max-width:1180px;margin:0 auto;padding:26px 16px 90px}
   .tab{display:none} .tab.active{display:block}
 
-  .panel{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    box-shadow:var(--shadow);margin-bottom:20px;overflow:hidden}
-  .panel>.head{padding:16px 18px;border-bottom:1px solid var(--line2);
+  .panel{background:var(--card);border:var(--glass-border);border-radius:var(--r-lg);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);margin-bottom:22px;overflow:hidden}
+  .panel>.head{padding:17px 20px;border-bottom:1px solid var(--line2);
     display:flex;align-items:center;gap:12px;flex-wrap:wrap}
   .panel>.head h2{font-size:15px;font-weight:600}
   .panel>.head .sub{font-size:12px;color:var(--muted);font-weight:400}
-  .panel>.body{padding:18px}
+  .panel>.body{padding:20px}
   .panel>.head .spacer{flex:1}
 
   .grid{display:grid;gap:14px}
   .stats{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}
-  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;
-    padding:16px 18px;box-shadow:var(--shadow)}
+  .stat{position:relative;overflow:hidden;background:var(--card);border:var(--glass-border);
+    border-radius:18px;padding:17px 19px;box-shadow:var(--shadow);
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .stat::before{content:"";position:absolute;width:130px;height:130px;border-radius:50%;
+    top:-65px;right:-45px;background:radial-gradient(circle,rgba(13,27,46,.05),transparent 70%);pointer-events:none}
+  .stat.good::before{background:radial-gradient(circle,rgba(14,157,111,.15),transparent 70%)}
+  .stat.warn::before{background:radial-gradient(circle,rgba(192,100,15,.14),transparent 70%)}
   .stat .label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;
     color:var(--muted);font-weight:600}
   .stat .num{font-family:'JetBrains Mono';font-weight:700;font-size:28px;
@@ -70,8 +106,10 @@
   .form-grid{display:grid;gap:12px 14px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));align-items:end}
   .field{display:flex;flex-direction:column;gap:5px}
   .field label{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink2);text-transform:uppercase}
-  .field input,.field select,.field textarea{padding:9px 10px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--text);width:100%}
-  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+  .field input,.field select,.field textarea{padding:10px 12px;border:1px solid rgba(13,27,46,.13);
+    border-radius:var(--r-sm);background:rgba(255,255,255,.92);color:var(--text);width:100%;
+    transition:border-color .2s,box-shadow .2s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(14,157,111,.16)}
   .field.num input{font-family:'JetBrains Mono';text-align:right}
   .field textarea{resize:vertical;min-height:60px;font-family:inherit}
   .pair{display:flex;gap:6px}
@@ -79,14 +117,15 @@
   .pair select{width:78px;flex:none}
   .hide{display:none!important}
 
-  .btn{background:var(--green);color:#fff;border:none;border-radius:8px;
-    padding:10px 16px;font-weight:600;font-size:13px}
-  .btn:hover{background:#356b50}
-  .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--line)}
-  .btn.ghost:hover{border-color:var(--ink2);background:#f7f8f6}
-  .btn.sm{padding:6px 11px;font-size:12px}
-  .btn.danger{background:#fff;color:var(--amber);border:1px solid var(--amber-line)}
-  .btn.danger:hover{background:var(--amber-soft)}
+  .btn{background:linear-gradient(135deg,#11b07c,#0b8a60);color:#fff;border:none;border-radius:999px;
+    padding:10px 19px;font-weight:600;font-size:13px;
+    box-shadow:0 6px 16px -6px rgba(11,138,96,.55);transition:filter .2s,box-shadow .2s}
+  .btn:hover{filter:brightness(1.07);box-shadow:0 8px 22px -6px rgba(11,138,96,.65)}
+  .btn.ghost{background:rgba(255,255,255,.88);color:var(--ink);border:1px solid rgba(13,27,46,.13);box-shadow:none}
+  .btn.ghost:hover{border-color:rgba(13,27,46,.28);background:#fff;filter:none;box-shadow:none}
+  .btn.sm{padding:7px 14px;font-size:12px}
+  .btn.danger{background:rgba(255,255,255,.88);color:var(--amber);border:1px solid var(--amber-line);box-shadow:none}
+  .btn.danger:hover{background:var(--amber-soft);filter:none;box-shadow:none}
 
   table{width:100%;border-collapse:collapse;font-size:13px}
   th{text-align:left;font-size:11px;letter-spacing:.06em;text-transform:uppercase;
@@ -94,14 +133,14 @@
   th.r,td.r{text-align:right}
   td{padding:11px 12px;border-bottom:1px solid var(--line2);vertical-align:middle}
   tr:last-child td{border-bottom:none}
-  tbody tr:hover{background:#f8f9f7}
+  tbody tr:hover{background:rgba(13,27,46,.03)}
   td .name{font-weight:600;color:var(--ink)}
   td .meta{font-size:11px;color:var(--muted);margin-top:2px}
   td.num,th.num{font-family:'JetBrains Mono';text-align:right;font-variant-numeric:tabular-nums}
   .row-actions{display:flex;gap:6px;justify-content:flex-end}
-  .iconbtn{border:1px solid var(--line);background:#fff;border-radius:6px;
-    padding:4px 9px;font-size:12px;color:var(--ink2);font-weight:600}
-  .iconbtn:hover{border-color:var(--ink2)}
+  .iconbtn{border:1px solid rgba(13,27,46,.12);background:rgba(255,255,255,.85);border-radius:999px;
+    padding:5px 12px;font-size:12px;color:var(--ink2);font-weight:600;transition:border-color .2s,background .2s,color .2s}
+  .iconbtn:hover{border-color:var(--ink2);background:#fff}
   .iconbtn.del:hover{color:var(--amber);border-color:var(--amber-line);background:var(--amber-soft)}
 
   .gauge{height:6px;background:var(--line2);border-radius:99px;overflow:hidden;margin-top:6px;min-width:90px}
@@ -112,28 +151,30 @@
   .pill.a{background:var(--amber-soft);color:var(--amber)}
   .pill.n{background:#eef0f2;color:var(--ink2)}
   .typebadge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
-    padding:2px 7px;border-radius:5px}
+    padding:2px 9px;border-radius:99px}
   .typebadge.food{background:var(--green-soft);color:var(--green)}
   .typebadge.bev{background:var(--bev-soft);color:var(--bev)}
-  .tag{display:inline-block;font-size:10px;background:#eef0f2;color:var(--ink2);
-    padding:2px 7px;border-radius:5px;margin:2px 3px 0 0;font-weight:500}
+  .tag{display:inline-block;font-size:10px;background:rgba(13,27,46,.06);color:var(--ink2);
+    padding:2px 9px;border-radius:99px;margin:2px 3px 0 0;font-weight:500}
   .tag.alg{background:var(--amber-soft);color:var(--amber)}
 
   .filterbar{display:flex;gap:6px;flex-wrap:wrap}
-  .fpill{border:1px solid var(--line);background:#fff;border-radius:99px;padding:5px 13px;
-    font-size:12px;font-weight:600;color:var(--muted)}
-  .fpill.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .fpill{border:1px solid rgba(13,27,46,.12);background:rgba(255,255,255,.8);border-radius:99px;padding:6px 14px;
+    font-size:12px;font-weight:600;color:var(--muted);transition:color .2s,background .2s,border-color .2s}
+  .fpill:hover:not(.on){color:var(--ink);border-color:rgba(13,27,46,.25)}
+  .fpill.on{background:linear-gradient(135deg,#16314b,#0d1b2e);color:#fff;border-color:transparent;
+    box-shadow:0 5px 14px -5px rgba(13,27,46,.4)}
 
   .allergen-box{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:6px 10px;
-    border:1px solid var(--line);border-radius:8px;padding:12px;background:#fbfcfb}
+    border:1px solid rgba(13,27,46,.1);border-radius:var(--r-md);padding:14px;background:rgba(255,255,255,.55)}
   .allergen-box label{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;
     text-transform:none;letter-spacing:0;color:var(--text);cursor:pointer}
   .allergen-box input{width:auto}
 
   .lines{margin-top:6px}
   .line{display:flex;gap:8px;align-items:center;margin-bottom:8px}
-  .line select{flex:1;min-width:0;padding:8px 9px;border:1px solid var(--line);border-radius:8px}
-  .line input{width:90px;text-align:right;font-family:'JetBrains Mono';padding:8px 9px;border:1px solid var(--line);border-radius:8px}
+  .line select{flex:1;min-width:0;padding:8px 10px;border:1px solid rgba(13,27,46,.13);border-radius:var(--r-sm);background:rgba(255,255,255,.92)}
+  .line input{width:90px;text-align:right;font-family:'JetBrains Mono';padding:8px 10px;border:1px solid rgba(13,27,46,.13);border-radius:var(--r-sm);background:rgba(255,255,255,.92)}
   .line .u{font-size:12px;color:var(--muted);width:34px}
   .line .lc{width:74px;text-align:right;font-family:'JetBrains Mono';font-size:12px;color:var(--ink2)}
   .line .x{border:none;background:none;color:var(--muted);font-size:18px;line-height:1;padding:0 4px}
@@ -141,36 +182,49 @@
 
   /* photo */
   .photo-drop{display:flex;align-items:center;gap:14px}
-  .thumb{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--line);background:#f0f1ee}
-  .thumb-ph{width:64px;height:64px;border-radius:8px;border:1px dashed var(--line);
-    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;background:#fafbf9}
-  .photo-preview{width:120px;height:90px;border-radius:10px;object-fit:cover;border:1px solid var(--line)}
+  .thumb{width:64px;height:64px;border-radius:14px;object-fit:cover;border:1px solid var(--line);background:#eef0f4}
+  .thumb-ph{width:64px;height:64px;border-radius:14px;border:1px dashed rgba(13,27,46,.2);
+    display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:11px;background:rgba(255,255,255,.5)}
+  .photo-preview{width:120px;height:90px;border-radius:var(--r-md);object-fit:cover;border:1px solid var(--line)}
 
   .empty{text-align:center;padding:38px 20px;color:var(--muted)}
   .empty strong{display:block;color:var(--ink);font-family:'Space Grotesk';font-size:15px;margin-bottom:4px}
 
-  .note{background:#f0f4f7;border:1px solid #d6e0e8;border-radius:10px;padding:13px 15px;
+  .note{background:rgba(228,238,247,.65);border:1px solid rgba(13,27,46,.08);border-radius:var(--r-md);padding:14px 16px;
     font-size:12.5px;color:var(--ink2);line-height:1.55}
   .note b{color:var(--ink)}
-  textarea.csv{width:100%;font-family:'JetBrains Mono';font-size:12px;border:1px solid var(--line);
-    border-radius:8px;padding:10px;min-height:90px;resize:vertical}
+  textarea.csv{width:100%;font-family:'JetBrains Mono';font-size:12px;border:1px solid rgba(13,27,46,.13);
+    background:rgba(255,255,255,.92);border-radius:var(--r-sm);padding:12px;min-height:90px;resize:vertical;
+    transition:border-color .2s,box-shadow .2s}
+  textarea.csv:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(14,157,111,.16)}
   .barlist{display:flex;flex-direction:column;gap:9px}
   .barrow{display:grid;grid-template-columns:130px 1fr 70px;align-items:center;gap:10px;font-size:12.5px}
-  .barrow .track{height:18px;background:var(--line2);border-radius:6px;overflow:hidden}
-  .barrow .track i{display:block;height:100%;background:var(--amber);border-radius:6px}
-  .toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(20px);
-    background:var(--ink);color:#fff;padding:11px 18px;border-radius:9px;font-size:13px;font-weight:500;
-    opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+  .barrow .track{height:16px;background:rgba(13,27,46,.06);border-radius:99px;overflow:hidden}
+  .barrow .track i{display:block;height:100%;background:linear-gradient(90deg,#e0893a,var(--amber));border-radius:99px}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);
+    background:rgba(13,27,46,.92);color:#fff;padding:11px 20px;border-radius:999px;font-size:13px;font-weight:500;
+    backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    opacity:0;pointer-events:none;transition:.25s;z-index:50;box-shadow:0 12px 36px rgba(13,27,46,.35)}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
   /* lookbook */
-  .look-cover{background:var(--ink);color:#fff;border-radius:14px;padding:30px 32px;margin-bottom:20px}
+  .look-cover{position:relative;overflow:hidden;color:#fff;border-radius:var(--r-lg);padding:34px 36px;margin-bottom:22px;
+    background:linear-gradient(115deg,#0a1626,#15293f 60%,#0e2233)}
+  .look-cover::before,.look-cover::after{content:"";position:absolute;border-radius:50%;pointer-events:none}
+  .look-cover::before{width:440px;height:440px;top:-280px;right:-70px;
+    background:radial-gradient(circle,rgba(16,185,129,.3),transparent 65%)}
+  .look-cover::after{width:360px;height:360px;bottom:-260px;left:22%;
+    background:radial-gradient(circle,rgba(110,87,204,.26),transparent 65%)}
+  .look-cover h2,.look-cover p{position:relative;z-index:1}
   .look-cover h2{color:#fff;font-size:26px;letter-spacing:.01em}
   .look-cover p{color:#9fb2c6;font-size:13px;margin:8px 0 0;max-width:560px}
   .lookgrid{display:grid;gap:18px;grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
-  .lookcard{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;
-    box-shadow:var(--shadow);display:flex;flex-direction:column}
-  .lookcard .ph{aspect-ratio:4/3;width:100%;object-fit:cover;display:block;background:#e7e9e4}
+  .lookcard{background:var(--card);border:var(--glass-border);border-radius:20px;overflow:hidden;
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    box-shadow:var(--shadow);display:flex;flex-direction:column;
+    transition:transform .2s,box-shadow .2s}
+  .lookcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-lift)}
+  .lookcard .ph{aspect-ratio:4/3;width:100%;object-fit:cover;display:block;background:#e7e9ee}
   .lookcard .ph-empty{aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
     background:linear-gradient(135deg,#22384f,#16263a)}
   .lookcard .ph-empty span{font-family:'Space Grotesk';font-weight:700;font-size:30px;color:#46627d}
@@ -191,13 +245,16 @@
     .tab{display:none!important}
     #tab-look.active{display:block!important}
     .look-cover{box-shadow:none}
+    .panel,.stat,.lookcard{backdrop-filter:none;-webkit-backdrop-filter:none;background:#fff;border-color:var(--line)}
     .lookcard{break-inside:avoid;box-shadow:none}
     .lookgrid{grid-template-columns:repeat(3,1fr)}
   }
   /* modal + progress */
-  .overlay{position:fixed;inset:0;background:rgba(16,24,36,.55);display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
+  .overlay{position:fixed;inset:0;background:rgba(9,17,29,.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    display:none;align-items:center;justify-content:center;z-index:60;padding:20px}
   .overlay.show{display:flex}
-  .modal{background:#fff;border-radius:14px;max-width:540px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
+  .modal{background:rgba(255,255,255,.96);border-radius:24px;max-width:540px;width:100%;
+    border:var(--glass-border);box-shadow:0 24px 70px rgba(9,17,29,.35);overflow:hidden;max-height:90vh;display:flex;flex-direction:column}
   .modal .m-head{padding:18px 20px;border-bottom:1px solid var(--line2)}
   .modal .m-head h3{font-size:17px}
   .modal .m-head p{margin:7px 0 0;font-size:12.5px;color:var(--muted);line-height:1.5}
@@ -207,7 +264,25 @@
   .checkgrid label{display:flex;align-items:center;gap:9px;font-size:13px;font-weight:500;cursor:pointer;color:var(--text)}
   .checkgrid input{width:16px;height:16px;accent-color:var(--green)}
   .m-section{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700;margin:0 0 9px}
-  .progress{position:fixed;inset:0;background:rgba(255,255,255,.88);display:none;align-items:center;justify-content:center;z-index:70;flex-direction:column;gap:14px}
+  .progress{position:fixed;inset:0;background:rgba(255,255,255,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    display:none;align-items:center;justify-content:center;z-index:70;flex-direction:column;gap:14px}
+
+  /* auth gate */
+  .auth-gate{position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;
+    background:
+      radial-gradient(900px 500px at 80% -120px,rgba(16,185,129,.2),transparent 60%),
+      radial-gradient(700px 480px at -120px 85%,rgba(110,87,204,.18),transparent 62%),
+      linear-gradient(120deg,#0a1626,#13283e 60%,#0d2133)}
+  .auth-card{background:rgba(255,255,255,.93);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+    border:var(--glass-border);border-radius:26px;box-shadow:0 24px 70px rgba(9,17,29,.45);
+    padding:34px 32px;max-width:380px;width:100%;display:flex;flex-direction:column;gap:14px}
+  .auth-card .auth-brand{font-family:'Space Grotesk';font-weight:700;font-size:17px;color:var(--ink);
+    display:flex;align-items:baseline;gap:9px}
+  .auth-card .auth-brand small{font-weight:500;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .auth-card h3{font-size:21px}
+  .auth-card p{margin:0;font-size:13px;color:var(--muted);line-height:1.55}
+  .auth-err{font-size:12.5px;color:var(--amber);display:none}
+  .auth-err.show{display:block}
   .progress.show{display:flex}
   .spinner{width:38px;height:38px;border:3px solid var(--line);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
@@ -243,6 +318,7 @@
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
 <header>
@@ -251,6 +327,7 @@
   <div class="io">
     <button onclick="exportData()">Export backup</button>
     <button onclick="document.getElementById('importFile').click()">Import backup</button>
+    <button onclick="signOut()">Sign out</button>
     <input type="file" id="importFile" accept=".json" style="display:none" onchange="importData(event)">
   </div>
 </header>
@@ -499,6 +576,9 @@
           <button class="btn danger sm" onclick="wipeAll()">Erase all data</button>
         </div>
         <p id="storeStatus" style="font-size:11.5px;color:var(--muted);margin-top:12px"></p>
+        <p style="font-size:11.5px;color:var(--muted);margin-top:6px;max-width:560px">
+          Team access: add or remove people in the Supabase dashboard (Authentication → Users). If two people
+          edit the same record at once, the last save wins; open windows update live.</p>
       </div>
     </div>
   </section>
@@ -538,6 +618,20 @@
   </div>
 </div>
 <div class="progress" id="progress"><div class="spinner"></div><div class="pmsg" id="pmsg">Preparing…</div></div>
+
+<div class="auth-gate hide" id="authGate">
+  <div class="auth-card">
+    <div class="auth-brand">F&amp;B Control <small>cost · calories · waste</small></div>
+    <h3 id="authTitle">Sign in</h3>
+    <p id="authHint">Enter your work email and we'll send you a sign-in link.</p>
+    <div class="field" id="authEmailField"><label>Email</label>
+      <input id="authEmail" type="email" placeholder="you@hotel.com" autocomplete="email"
+        onkeydown="if(event.key==='Enter')authStep()"></div>
+    <div class="auth-err" id="authErr"></div>
+    <button class="btn" id="authBtn" onclick="authStep()">Send sign-in link</button>
+    <button class="btn ghost sm hide" id="authBack" onclick="authReset()">Use a different email</button>
+  </div>
+</div>
 <div class="lb-stage" id="lbStage"><div class="lbpage" id="lbPage"></div></div>
 
 <div class="toast" id="toast"></div>
@@ -552,13 +646,59 @@ let editIng=null, editRec=null, editWaste=null;
 let recLines=[], recPhoto='';
 let ingFilter='All', recFilter='All', lookFilter='All', lookOutlet='All';
 
-/* ---------- persistence ---------- */
-const KEY='hns_fb_control';
-let hasStore=(typeof window!=='undefined' && window.storage && typeof window.storage.get==='function');
-async function persist(){ if(!hasStore)return;
-  try{ await window.storage.set(KEY, JSON.stringify(S), false); }catch(e){ hasStore=false; setStoreStatus(); } }
+/* ---------- persistence (Supabase) ---------- */
+const SUPA_URL='https://goshumgotgrholkacrpa.supabase.co';
+const SUPA_KEY='sb_publishable_QxR2jSfppkzI_3_g5kQRRg_VoA-1k21';
+const APP_URL='https://goshumgotgrholkacrpa.supabase.co/functions/v1/app';
+const db=(typeof window!=='undefined'&&window.supabase)
+  ?window.supabase.createClient(SUPA_URL,SUPA_KEY,{auth:{flowType:'implicit',detectSessionInUrl:true}})
+  :null;
+let online=!!db;
+
+function syncFail(e){ console.error(e); if(online){online=false;setStoreStatus();} toast('Save failed — check connection'); }
+async function dbUpsert(kind,id,data){
+  if(!db||!online)return;
+  const {error}=await db.from('fb_records').upsert({id,kind,data});
+  if(error)syncFail(error);
+}
+async function dbDelete(id){
+  if(!db||!online)return;
+  const {error}=await db.from('fb_records').delete().eq('id',id);
+  if(error)syncFail(error);
+}
+async function dbReplaceAll(){
+  if(!db||!online)return;
+  const {error:e1}=await db.from('fb_records').delete().neq('id','');
+  if(e1){syncFail(e1);return;}
+  const rows=[
+    {id:'settings',kind:'settings',data:S.settings},
+    {id:'sales',kind:'sales',data:S.sales},
+    ...S.ingredients.map(i=>({id:i.id,kind:'ingredient',data:i})),
+    ...S.recipes.map(r=>({id:r.id,kind:'recipe',data:r})),
+    ...S.waste.map(w=>({id:w.id,kind:'waste',data:w}))
+  ];
+  const {error:e2}=await db.from('fb_records').upsert(rows);
+  if(e2)syncFail(e2);
+}
+let _salesT;
+function persistSales(){ clearTimeout(_salesT); _salesT=setTimeout(()=>dbUpsert('sales','sales',S.sales),400); }
+
 async function loadState(){
-  if(hasStore){ try{ const r=await window.storage.get(KEY); if(r&&r.value) S=JSON.parse(r.value); }catch(e){} }
+  if(db){
+    try{
+      const {data,error}=await db.from('fb_records').select('id,kind,data');
+      if(error)throw error;
+      S={settings:{vat:20,targetGP:70},ingredients:[],recipes:[],waste:[],sales:[]};
+      data.forEach(r=>{
+        if(r.kind==='settings')S.settings=r.data;
+        else if(r.kind==='sales')S.sales=r.data;
+        else if(r.kind==='ingredient')S.ingredients.push(r.data);
+        else if(r.kind==='recipe')S.recipes.push(r.data);
+        else if(r.kind==='waste')S.waste.push(r.data);
+      });
+      online=true;
+    }catch(e){ console.error(e); online=false; }
+  }
   normalize();
 }
 function normalize(){
@@ -569,9 +709,73 @@ function normalize(){
 }
 function setStoreStatus(){
   const el=document.getElementById('storeStatus'); if(!el)return;
-  el.textContent=hasStore
-    ? "Data (including photos) is saved automatically in this browser. Use Export backup to keep a copy or move it elsewhere."
-    : "Auto-save isn't available here, so data lasts for this session only — use Export backup to save your work to a file, and Import to restore it.";
+  el.textContent=online
+    ? "Data (including photos) syncs automatically to your team's cloud database. Everyone signed in works on the same live data. Export backup keeps an offline copy."
+    : "Cloud sync is unavailable — changes are NOT being saved. Use Export backup before closing this tab, then Import once you're back online.";
+}
+
+/* ---------- realtime sync ---------- */
+function startRealtime(){
+  if(!db)return;
+  db.channel('fb_records_changes')
+    .on('postgres_changes',{event:'*',schema:'public',table:'fb_records'},applyRemote)
+    .subscribe();
+}
+function applyRemote(p){
+  if(p.eventType==='DELETE'){
+    const id=p.old&&p.old.id; if(!id)return;
+    ['ingredients','recipes','waste'].forEach(k=>S[k]=S[k].filter(x=>x.id!==id));
+  }else{
+    const row=p.new; if(!row||!row.id)return;
+    if(row.kind==='settings')S.settings=row.data;
+    else if(row.kind==='sales')S.sales=row.data;
+    else{
+      const k=row.kind==='ingredient'?'ingredients':row.kind==='recipe'?'recipes':'waste';
+      const i=S[k].findIndex(x=>x.id===row.id);
+      if(i>=0)S[k][i]=row.data; else S[k].push(row.data);
+    }
+  }
+  normalize(); fillSettings(); renderAll();
+}
+
+/* ---------- auth ---------- */
+let authEmail='', appStarted=false;
+function authErr(msg){ const el=document.getElementById('authErr');
+  el.textContent=msg||''; el.classList.toggle('show',!!msg); }
+function authReset(){
+  authEmail='';
+  document.getElementById('authEmailField').classList.remove('hide');
+  document.getElementById('authBack').classList.add('hide');
+  const btn=document.getElementById('authBtn');
+  btn.classList.remove('hide'); btn.textContent='Send sign-in link';
+  document.getElementById('authHint').textContent="Enter your work email and we'll send you a sign-in link.";
+  authErr('');
+}
+async function authStep(){
+  const btn=document.getElementById('authBtn');
+  const email=document.getElementById('authEmail').value.trim();
+  if(!email||!email.includes('@')){authErr('Enter a valid email address');return;}
+  btn.disabled=true; btn.textContent='Sending…'; authErr('');
+  const {error}=await db.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:APP_URL}});
+  btn.disabled=false;
+  if(error){
+    btn.textContent='Send sign-in link';
+    authErr(/not allowed|not found|signup/i.test(error.message)
+      ? "This email isn't registered — ask your admin to add you."
+      : error.message);
+    return;
+  }
+  authEmail=email;
+  document.getElementById('authEmailField').classList.add('hide');
+  document.getElementById('authBack').classList.remove('hide');
+  btn.classList.add('hide');
+  document.getElementById('authHint').textContent='We emailed a sign-in link to '+email+'. Open it on this device — it signs you straight in, and you can close this tab.';
+}
+async function signOut(){ if(db) await db.auth.signOut(); location.reload(); }
+async function startApp(){
+  if(appStarted)return; appStarted=true;
+  document.getElementById('authGate').classList.add('hide');
+  await loadState(); init(); startRealtime();
 }
 
 /* ---------- helpers ---------- */
@@ -651,9 +855,10 @@ function saveIngredient(){
     kcal:parseFloat(document.getElementById('ingKcal').value)||0,
     abv: type==='Beverage'?(parseFloat(document.getElementById('ingAbv').value)||0):0,
     allergens:[...document.querySelectorAll('#ingAllergens input:checked')].map(c=>c.value) };
-  if(editIng){ Object.assign(ing(editIng),data); toast('Ingredient updated'); }
-  else { S.ingredients.push({id:uid(),...data}); toast('Ingredient added'); }
-  resetIngForm(); persist(); renderAll();
+  let saved;
+  if(editIng){ saved=ing(editIng); Object.assign(saved,data); toast('Ingredient updated'); }
+  else { saved={id:uid(),...data}; S.ingredients.push(saved); toast('Ingredient added'); }
+  resetIngForm(); dbUpsert('ingredient',saved.id,saved); renderAll();
 }
 function resetIngForm(){
   editIng=null;
@@ -684,8 +889,10 @@ function editIngredient(id){
 function delIngredient(id){
   if(!confirm('Delete this ingredient? Recipes using it will lose that line.'))return;
   S.ingredients=S.ingredients.filter(i=>i.id!==id);
+  const touched=S.recipes.filter(r=>r.lines.some(l=>l.ingredientId===id));
   S.recipes.forEach(r=>r.lines=r.lines.filter(l=>l.ingredientId!==id));
-  persist(); renderAll(); toast('Ingredient deleted');
+  dbDelete(id); touched.forEach(r=>dbUpsert('recipe',r.id,r));
+  renderAll(); toast('Ingredient deleted');
 }
 function renderIngredients(){
   renderFilterBar('ingFilterBar',ingFilter,['All','Food','Beverage'],v=>{ingFilter=v;renderIngredients();});
@@ -791,9 +998,10 @@ function saveRecipe(){
     desc:document.getElementById('recDesc').value.trim(),
     photo:recPhoto,
     lines:recLines.filter(l=>l.ingredientId&&l.qty>0) };
-  if(editRec){ Object.assign(S.recipes.find(r=>r.id===editRec),data); toast('Menu item updated'); }
-  else { S.recipes.push({id:uid(),...data}); toast('Menu item added'); }
-  resetRecForm(); persist(); renderAll();
+  let saved;
+  if(editRec){ saved=S.recipes.find(r=>r.id===editRec); Object.assign(saved,data); toast('Menu item updated'); }
+  else { saved={id:uid(),...data}; S.recipes.push(saved); toast('Menu item added'); }
+  resetRecForm(); dbUpsert('recipe',saved.id,saved); renderAll();
 }
 function resetRecForm(){
   editRec=null; recLines=[]; recPhoto='';
@@ -821,7 +1029,7 @@ function editRecipe(id){
   renderRecLines(); window.scrollTo({top:0,behavior:'smooth'});
 }
 function delRecipe(id){ if(!confirm('Delete this menu item?'))return;
-  S.recipes=S.recipes.filter(r=>r.id!==id); persist(); renderAll(); toast('Menu item deleted'); }
+  S.recipes=S.recipes.filter(r=>r.id!==id); dbDelete(id); renderAll(); toast('Menu item deleted'); }
 function renderRecipes(){
   renderFilterBar('recFilterBar',recFilter,['All','Food','Beverage'],v=>{recFilter=v;renderRecipes();});
   const list=S.recipes.filter(r=>recFilter==='All'||r.type===recFilter);
@@ -898,9 +1106,10 @@ function saveWaste(){
     qty:parseFloat(document.getElementById('wQty').value)||0,
     value:parseFloat(document.getElementById('wValue').value)||0,
     note:document.getElementById('wNote').value.trim()};
-  if(editWaste){ Object.assign(S.waste.find(w=>w.id===editWaste),data); toast('Waste entry updated'); }
-  else { S.waste.push({id:uid(),...data}); toast('Waste logged'); }
-  resetWasteForm(); persist(); renderAll();
+  let saved;
+  if(editWaste){ saved=S.waste.find(w=>w.id===editWaste); Object.assign(saved,data); toast('Waste entry updated'); }
+  else { saved={id:uid(),...data}; S.waste.push(saved); toast('Waste logged'); }
+  resetWasteForm(); dbUpsert('waste',saved.id,saved); renderAll();
 }
 function resetWasteForm(){
   editWaste=null;
@@ -926,7 +1135,7 @@ function editWasteEntry(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function delWaste(id){ if(!confirm('Delete this entry?'))return;
-  S.waste=S.waste.filter(w=>w.id!==id); persist(); renderAll(); toast('Entry deleted'); }
+  S.waste=S.waste.filter(w=>w.id!==id); dbDelete(id); renderAll(); toast('Entry deleted'); }
 function renderWaste(){
   document.getElementById('wasteCount').textContent=S.waste.length+' entries';
   const wrap=document.getElementById('wasteTableWrap');
@@ -951,12 +1160,12 @@ function loadCsv(){
   if(!txt){toast('Paste some CSV first');return;}
   S.sales=[];
   txt.split(/\n+/).forEach(l=>{const r=l.split(/[,\t]/);const name=(r[0]||'').trim();const q=parseFloat(r[1])||0;if(name)S.sales.push({name,qty:q});});
-  persist(); renderSales(); toast(S.sales.length+' lines loaded');
+  persistSales(); renderSales(); toast(S.sales.length+' lines loaded');
 }
-function addSalesRow(){ S.sales.push({name:'',qty:0}); persist(); renderSales(); }
-function clearSales(){ S.sales=[]; persist(); renderSales(); }
-function updSales(idx,f,v){ S.sales[idx][f]= f==='qty'?(parseFloat(v)||0):v; persist(); renderSales(); }
-function rmSales(idx){ S.sales.splice(idx,1); persist(); renderSales(); }
+function addSalesRow(){ S.sales.push({name:'',qty:0}); persistSales(); renderSales(); }
+function clearSales(){ S.sales=[]; persistSales(); renderSales(); }
+function updSales(idx,f,v){ S.sales[idx][f]= f==='qty'?(parseFloat(v)||0):v; persistSales(); renderSales(); }
+function rmSales(idx){ S.sales.splice(idx,1); persistSales(); renderSales(); }
 function matchRecipe(name){ const n=name.trim().toLowerCase();
   return S.recipes.find(r=>r.name.trim().toLowerCase()===n)
       || S.recipes.find(r=>n.length>2 && r.name.trim().toLowerCase().includes(n)); }
@@ -970,8 +1179,8 @@ function renderSales(){
     if(r){const c=recipeCalc(r.lines);lr=r.price*s.qty;lc=c.cost*s.qty;revenue+=lr;cogs+=lc;matched++;
       status=`<span class="pill g">${esc(r.name)}</span>`;}
     return `<tr>
-      <td><input value="${esc(s.name)}" onchange="updSales(${idx},'name',this.value)" style="border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:100%"></td>
-      <td class="num"><input type="number" value="${s.qty||''}" onchange="updSales(${idx},'qty',this.value)" class="mono" style="border:1px solid var(--line);border-radius:6px;padding:6px 8px;width:80px;text-align:right"></td>
+      <td><input value="${esc(s.name)}" onchange="updSales(${idx},'name',this.value)" style="border:1px solid rgba(13,27,46,.13);background:rgba(255,255,255,.92);border-radius:10px;padding:6px 10px;width:100%"></td>
+      <td class="num"><input type="number" value="${s.qty||''}" onchange="updSales(${idx},'qty',this.value)" class="mono" style="border:1px solid rgba(13,27,46,.13);background:rgba(255,255,255,.92);border-radius:10px;padding:6px 10px;width:80px;text-align:right"></td>
       <td>${status}</td><td class="num">${money(lr)}</td><td class="num">${money(lc)}</td>
       <td><button class="iconbtn del" onclick="rmSales(${idx})">×</button></td></tr>`;
   }).join('');
@@ -1081,7 +1290,7 @@ function renderDash(){
 function saveSettings(){
   S.settings.vat=parseFloat(document.getElementById('setVat').value)||0;
   S.settings.targetGP=parseFloat(document.getElementById('setGP').value)||0;
-  persist(); renderAll(); toast('Settings saved');
+  dbUpsert('settings','settings',S.settings); renderAll(); toast('Settings saved');
 }
 function fillSettings(){ document.getElementById('setVat').value=S.settings.vat; document.getElementById('setGP').value=S.settings.targetGP; }
 function exportData(){
@@ -1093,14 +1302,14 @@ function exportData(){
 function importData(e){
   const f=e.target.files[0]; if(!f)return;
   const rd=new FileReader();
-  rd.onload=()=>{ try{ S=JSON.parse(rd.result); normalize(); persist(); init(); toast('Backup restored'); }
+  rd.onload=()=>{ try{ S=JSON.parse(rd.result); normalize(); dbReplaceAll(); init(); toast('Backup restored'); }
     catch(err){ toast('Could not read that file'); } };
   rd.readAsText(f); e.target.value='';
 }
 function wipeAll(){
   if(!confirm('Erase all data? Export a backup first if unsure.'))return;
   S={settings:{vat:20,targetGP:70},ingredients:[],recipes:[],waste:[],sales:[]};
-  persist(); init(); toast('All data erased');
+  dbReplaceAll(); init(); toast('All data erased');
 }
 function loadSample(){
   const mk=(name,type,cat,unit,packKgL,cost,kcal,opt={})=>({id:uid(),name,type,
@@ -1144,7 +1353,7 @@ function loadSample(){
     {id:uid(),date:today,reason:'Spoilage / out of date',ingredientId:straw.id,qty:500,value:+(500*costPerBase(straw)).toFixed(2),note:''}
   ];
   S.sales=[{name:'Cod cheek nuggets',qty:42},{name:'Hyde Park Collins',qty:28},{name:'Pint of lager',qty:60}];
-  persist(); init(); toast('Sample data loaded');
+  dbReplaceAll(); init(); toast('Sample data loaded');
 }
 
 /* ---------- lookbook PDF generation ---------- */
@@ -1253,7 +1462,13 @@ function init(){
   fillSettings(); setStoreStatus(); resetWasteForm();
   renderRecLines(); showPhoto(); renderAll();
 }
-(async function(){ await loadState(); init(); })();
+(async function(){
+  if(!db){ online=false; await loadState(); init(); return; }
+  const {data:{session}}=await db.auth.getSession();
+  if(session){ await startApp(); }
+  else{ document.getElementById('authGate').classList.remove('hide'); authReset(); }
+  db.auth.onAuthStateChange((ev,sess)=>{ if(sess&&!appStarted) startApp(); });
+})();
 </script>
 </body>
 </html>
