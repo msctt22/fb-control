@@ -476,8 +476,8 @@
           <div class="field" style="grid-column:span 2"><label>Item name</label><input id="recName" placeholder="e.g. Cod cheek nuggets"></div>
           <div class="field"><label>Outlet</label>
             <select id="recOutlet">
-              <option>FYND</option><option>Hyde Out</option><option>Seekers Bar</option>
-              <option>Cocktail Bar</option><option>In-Room Dining</option><option>Events</option>
+              <option>Hyde Out</option><option>Seekers Restaurant</option><option>Seekers Bar</option>
+              <option>In-Room Dining</option><option>Events</option>
             </select></div>
           <div class="field num"><label>Selling price £ (gross)</label><input id="recPrice" type="number" min="0" step="any" placeholder="9.50"></div>
         </div>
@@ -1385,16 +1385,16 @@ function loadSample(){
   const lager=mk('Draught lager','Beverage','Beer','ml',50,130,43,{bevCat:'Beer',abv:4.5,alg:['Cereals w/ gluten']});
   S.ingredients=[cod,flour,egg,panko,oil,cream,straw,meringue,sugar,gin,lime,syrup,redwine,lager];
   S.recipes=[
-    {id:uid(),name:'Cod cheek nuggets',type:'Food',bevCat:'',outlet:'FYND',price:9.5,photo:'',
+    {id:uid(),name:'Cod cheek nuggets',type:'Food',bevCat:'',outlet:'Seekers Restaurant',price:9.5,photo:'',
       desc:'Crisp panko cod cheeks with lemon and tartare — a playful nod to fish & chips.',
       lines:[{ingredientId:cod.id,qty:140},{ingredientId:flour.id,qty:30},{ingredientId:egg.id,qty:0.5},{ingredientId:panko.id,qty:50},{ingredientId:oil.id,qty:25}]},
-    {id:uid(),name:'Seasonal Eton mess',type:'Food',bevCat:'',outlet:'FYND',price:8.0,photo:'',
+    {id:uid(),name:'Seasonal Eton mess',type:'Food',bevCat:'',outlet:'Seekers Restaurant',price:8.0,photo:'',
       desc:'Crushed meringue, double cream and macerated strawberries, served family-style.',
       lines:[{ingredientId:cream.id,qty:120},{ingredientId:straw.id,qty:90},{ingredientId:meringue.id,qty:2},{ingredientId:sugar.id,qty:15}]},
-    {id:uid(),name:'Hyde Park Collins',type:'Beverage',bevCat:'Cocktail',outlet:'Cocktail Bar',price:12.0,photo:'',
+    {id:uid(),name:'Hyde Park Collins',type:'Beverage',bevCat:'Cocktail',outlet:'Seekers Bar',price:12.0,photo:'',
       desc:'London dry gin, fresh lime and sugar, lengthened with soda — bright and easy.',
       lines:[{ingredientId:gin.id,qty:50},{ingredientId:lime.id,qty:25},{ingredientId:syrup.id,qty:15}]},
-    {id:uid(),name:'House red, 175ml',type:'Beverage',bevCat:'Wine',outlet:'FYND',price:8.0,photo:'',
+    {id:uid(),name:'House red, 175ml',type:'Beverage',bevCat:'Wine',outlet:'Seekers Restaurant',price:8.0,photo:'',
       desc:'A juicy, approachable red by the glass.',
       lines:[{ingredientId:redwine.id,qty:175}]},
     {id:uid(),name:'Pint of lager',type:'Beverage',bevCat:'Beer',outlet:'Seekers Bar',price:6.5,photo:'',
