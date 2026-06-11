@@ -15,6 +15,10 @@
   around; the local file remains usable for development.
 - JSON export/import backup retained as an offline escape hatch; if the cloud
   is unreachable the app keeps working in memory and warns that saves are off.
+- Lookbook PDF pages redesigned to an editorial template: Playfair Display
+  serif titles on cream, large photo left, right-hand rail of rounded cards
+  (ingredients, allergens, price, cost, GP, calories, units) with navy SVG
+  icon medallions, outlet tagline and ruled footer.
 
 ## 0.1.0 — initial
 - Single-file app: dashboard, ingredients, menu items, waste log, sales & COGS,

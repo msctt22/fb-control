@@ -6,7 +6,7 @@
 <title>F&B Control — Cost, Calories & Waste</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100;200;300;400;500&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 <link href="https://fonts.cdnfonts.com/css/aqua-grotesque" rel="stylesheet">
 <style>
   :root{
@@ -341,34 +341,46 @@
   @keyframes spin{to{transform:rotate(360deg)}}
   .progress .pmsg{font-size:13px;color:var(--ink2);font-weight:600}
 
-  /* offscreen A4 page builder */
+  /* offscreen A4 page builder — editorial template */
   .lb-stage{position:fixed;left:-99999px;top:0}
-  .lbpage{width:794px;height:1123px;overflow:hidden;background:#fff;color:#1d2730;
-    font-family:'Roboto Slab',serif;font-weight:300;display:flex;flex-direction:column;box-sizing:border-box}
-  .lbpage .pad{padding:0 56px}
-  .lbtop{display:flex;justify-content:space-between;align-items:center;padding:30px 56px 16px}
-  .lbtop .hotel{font-family:'Aqua Grotesque','Space Grotesk',sans-serif;font-weight:400;letter-spacing:.1em;color:var(--ink);font-size:15px}
-  .lbhero{width:100%;height:360px;object-fit:cover;display:block}
-  .lbhero-empty{width:100%;height:300px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#b9cce0,#8aa6c4)}
-  .lbhero-empty span{font-family:'Aqua Grotesque','Space Grotesk',sans-serif;font-weight:400;font-size:78px;color:rgba(255,255,255,.85)}
-  .lbname{font-family:'Aqua Grotesque','Space Grotesk',sans-serif;font-weight:400;letter-spacing:.04em;
-    font-size:40px;line-height:1.08;color:var(--ink);margin:26px 0 6px}
-  .lbcat{font-size:14px;color:var(--muted);letter-spacing:.02em;margin-bottom:18px}
-  .lbdesc{font-size:15.5px;line-height:1.6;color:#33414d;margin:0 0 26px;max-width:80%}
-  .lbstats{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:26px}
-  .lbstat{flex:1;padding:15px 16px;border-right:1px solid var(--line2)}
-  .lbstat:last-child{border-right:none}
-  .lbstat .l{font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:700}
-  .lbstat .v{font-family:'JetBrains Mono';font-weight:700;font-size:22px;color:var(--ink);margin-top:6px}
-  .lbcols{display:grid;grid-template-columns:1.3fr 1fr;gap:34px}
-  .lbcols h4{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink2);font-weight:700;
-    margin:0 0 10px;border-bottom:2px solid var(--green);padding-bottom:6px;display:inline-block}
-  .lbing{list-style:none;padding:0;margin:0}
-  .lbing li{display:flex;justify-content:space-between;gap:14px;font-size:14px;padding:7px 0;border-bottom:1px solid var(--line2);color:#33414d}
-  .lbing li .q{font-family:'JetBrains Mono';color:var(--muted);font-size:12.5px;white-space:nowrap}
-  .lbalg{display:flex;flex-wrap:wrap;gap:7px}
-  .lbalg span{background:var(--amber-soft);color:var(--amber);font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:7px}
-  .lbfoot{margin-top:auto;padding:22px 56px 30px;display:flex;justify-content:space-between;font-size:11px;color:var(--muted);font-style:italic}
+  .lbpage{width:794px;height:1123px;overflow:hidden;background:#f2eee6;color:#22344c;
+    font-family:'Roboto Slab',serif;font-weight:300;display:flex;flex-direction:column;
+    box-sizing:border-box;padding:48px 52px 38px;position:relative}
+  .lbpage *{box-sizing:border-box}
+  .lb-cols{display:flex;gap:30px;flex:1;min-height:0}
+  .lb-left{flex:1.15;display:flex;flex-direction:column;min-width:0}
+  .lb-right{width:296px;flex:none;display:flex;flex-direction:column;gap:13px}
+  .lb-title{font-family:'Playfair Display',serif;font-weight:500;font-size:52px;line-height:1.04;
+    letter-spacing:.01em;color:#1f3a5f;text-transform:uppercase;margin:0 0 18px}
+  .lb-divider{width:36px;border:none;border-top:2px solid #1f3a5f;margin:0 0 18px}
+  .lb-desc{font-style:italic;font-size:15px;line-height:1.65;color:#3c5068;margin:0 0 22px;max-width:92%}
+  .lb-photo{flex:1;min-height:0;border-radius:24px;overflow:hidden;position:relative;background:#e6dfd2}
+  .lb-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .lb-photo .ph-init{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(135deg,#e2e8ef,#bccbda)}
+  .lb-photo .ph-init span{font-family:'Playfair Display',serif;font-size:130px;color:rgba(31,58,95,.32)}
+  .lb-card{background:#faf7f1;border-radius:18px;padding:16px 18px 15px}
+  .lb-card-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+  .lb-ico{width:38px;height:38px;border-radius:50%;background:#1f3a5f;display:flex;align-items:center;justify-content:center;flex:none}
+  .lb-ico svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .lb-label{font-size:10.5px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:#1f3a5f}
+  .lb-big{font-family:'Playfair Display',serif;font-weight:400;font-size:32px;color:#1f3a5f;line-height:1.12}
+  .lb-small{font-size:12px;color:#56697e;font-style:italic;margin-top:2px}
+  .lb-list{list-style:none;margin:0;padding:0}
+  .lb-list li{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13px;padding:3px 0;color:#2c405a}
+  .lb-list li>span:first-child::before{content:"•";color:#1f3a5f;margin-right:9px}
+  .lb-list .q{font-family:'JetBrains Mono';color:#8395a8;font-size:11px;white-space:nowrap}
+  .lb-text{font-size:12.5px;line-height:1.6;color:#3c5068}
+  .lb-tagline{display:flex;align-items:center;gap:14px;margin-top:20px;flex:none}
+  .lb-tagline .ring{width:46px;height:46px;border-radius:50%;border:1.5px solid #1f3a5f;
+    display:flex;align-items:center;justify-content:center;flex:none}
+  .lb-tagline .ring svg{width:21px;height:21px;stroke:#1f3a5f;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+  .lb-tagline b{font-size:13px;letter-spacing:.13em;text-transform:uppercase;color:#1f3a5f;font-weight:500;display:block}
+  .lb-tagline span{font-size:12px;color:#56697e}
+  .lb-footer{display:flex;align-items:center;gap:18px;margin-top:26px;flex:none;
+    font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#56697e}
+  .lb-footer .rule{flex:1;border-top:1px solid rgba(31,58,95,.25)}
+  .lb-cover{display:flex;flex-direction:column;flex:1}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -1426,54 +1438,74 @@ function readLookOpts(){ const g=id=>document.getElementById(id).checked;
     category:g('opt_cat'),ingredients:g('opt_ing'),allergens:g('opt_alg'),calories:g('opt_cal'),
     cost:g('opt_cost'),price:g('opt_price'),gp:g('opt_gp'),units:g('opt_units')}; }
 
-function lbStatTiles(r,opts){
-  const c=recipeCalc(r.lines), g=gp(r.price,c.cost), t=[];
-  if(opts.calories) t.push(['Calories', num(c.kcal)+' kcal']);
-  if(opts.cost) t.push([isBev(r)?'Pour cost':'Food cost', money(c.cost)]);
-  if(opts.price) t.push(['Price', money(r.price)]);
-  if(opts.gp) t.push(['GP %', num(g.pct,1)+'%']);
-  if(opts.units && isBev(r) && c.units) t.push(['Units', num(c.units,1)]);
-  return t;
+const LB_ICO={
+  ing:'<svg viewBox="0 0 24 24"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M9.5 8c0-1.8 1.8-2 1.8-4"/><path d="M14 8c0-1.8 1.8-2 1.8-4"/></svg>',
+  alg:'<svg viewBox="0 0 24 24"><path d="M12 21V8"/><path d="M12 13c0-3-2.4-5-5-5 0 3 2.4 5 5 5z"/><path d="M12 13c0-3 2.4-5 5-5 0 3-2.4 5-5 5z"/><path d="M12 8c0-2.4-1.4-4-3-4.5 0 2.4 1.4 4 3 4.5z"/></svg>',
+  price:'<svg viewBox="0 0 24 24"><path d="M20.6 13.4 11 3.8H4v7l9.6 9.6a2 2 0 0 0 2.8 0l4.2-4.2a2 2 0 0 0 0-2.8z"/><circle cx="7.5" cy="7.3" r="1.3"/></svg>',
+  cost:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M14.6 8.6c-1.8-1.4-4.2-.5-4.2 1.7 0 1.1.4 1.9.4 3.2 0 1.5-.9 2.6-.9 2.6h5.3"/><path d="M8.8 13h4.2"/></svg>',
+  gp:'<svg viewBox="0 0 24 24"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg>',
+  cal:'<svg viewBox="0 0 24 24"><path d="M12 21.5c3.9 0 6.5-2.6 6.5-6.3 0-2.8-1.9-5.2-3.7-7.4-.9 1.7-1.8 2.7-3.1 3.7-.7-1.6-1.5-3.9-1.5-6.5-2.8 2.8-4.7 6.4-4.7 10.2 0 3.7 2.6 6.3 6.5 6.3z"/></svg>',
+  units:'<svg viewBox="0 0 24 24"><path d="M5.5 4.5h13L12 12.5z"/><path d="M12 12.5V19"/><path d="M8.5 20.5h7"/></svg>',
+  leaf:'<svg viewBox="0 0 24 24"><path d="M6.5 20.5C6.5 12 11 6 20 4.5 19 13.5 14.5 18.5 6.5 18.7"/><path d="M6.5 20.5c2-4.6 5.4-8.2 9.5-10.5"/></svg>'
+};
+function lbCard(ico,label,body){
+  return `<div class="lb-card"><div class="lb-card-head"><div class="lb-ico">${LB_ICO[ico]}</div><div class="lb-label">${label}</div></div>${body}</div>`;
 }
 function buildLookPage(r,opts){
-  const c=recipeCalc(r.lines);
+  const c=recipeCalc(r.lines), g=gp(r.price,c.cost), ok=g.pct>=S.settings.targetGP;
   const initials=r.name.split(/\s+/).slice(0,2).map(s=>s[0]||'').join('').toUpperCase();
-  let hero='';
-  if(opts.photo) hero = r.photo ? `<img class="lbhero" src="${r.photo}" alt="">`
-    : `<div class="lbhero-empty"><span>${esc(initials)}</span></div>`;
-  const badge = opts.category ? (isBev(r)
-      ? `<span class="typebadge bev">${esc(r.bevCat||'Beverage')}</span>`
-      : `<span class="typebadge food">Food</span>`) : '';
-  const tiles=lbStatTiles(r,opts).map(t=>`<div class="lbstat"><div class="l">${t[0]}</div><div class="v">${t[1]}</div></div>`).join('');
-  const ingBlock = opts.ingredients ? `<div><h4>Ingredients</h4><ul class="lbing">`+
-    r.lines.map(l=>{const i=ing(l.ingredientId); if(!i)return'';
-      return `<li><span>${esc(i.name)}</span><span class="q">${num(l.qty,l.qty%1?1:0)} ${unitLabel(i.unit)}</span></li>`;}).join('')
-    +`</ul></div>` : '';
-  const algBlock = opts.allergens ? `<div><h4>Allergens</h4>`+
-    (c.allergens.length ? `<div class="lbalg">`+c.allergens.map(a=>`<span>${esc(a)}</span>`).join('')+`</div>`
-      : `<p style="font-size:13px;color:#6b7780">No listed allergens.</p>`) +`</div>` : '';
-  const cols = (ingBlock||algBlock) ? `<div class="lbcols">${ingBlock}${algBlock}</div>` : '';
-  const desc = (opts.description && r.desc) ? `<p class="lbdesc">${esc(r.desc)}</p>` : '';
-  const catLine = opts.outlet ? `<div class="lbcat">${esc(r.outlet)}${isBev(r)&&r.bevCat?' · '+esc(r.bevCat):''}</div>` : '';
-  return `<div class="lbtop"><div class="hotel">HYDE &amp; SEEK</div><div>${badge}</div></div>
-    ${hero}
-    <div class="pad">
-      <h1 class="lbname">${esc(r.name)}</h1>
-      ${catLine}${desc}
-      ${tiles?`<div class="lbstats">${tiles}</div>`:''}
-      ${cols}
+  const cards=[];
+  if(opts.ingredients&&r.lines.length){
+    const items=r.lines.map(l=>{const i=ing(l.ingredientId);
+      return i?{n:i.name,q:num(l.qty,l.qty%1?1:0)+' '+unitLabel(i.unit)}:null}).filter(Boolean);
+    const body=items.length>7
+      ? `<div class="lb-text">${items.map(x=>esc(x.n)).join(' · ')}</div>`
+      : `<ul class="lb-list">${items.map(x=>`<li><span>${esc(x.n)}</span><span class="q">${x.q}</span></li>`).join('')}</ul>`;
+    cards.push(lbCard('ing','Ingredients',body));
+  }
+  if(opts.allergens){
+    cards.push(lbCard('alg','Allergens', c.allergens.length
+      ? `<div class="lb-text" style="font-size:13px"><b style="color:#1f3a5f;font-weight:500">Contains:</b> ${c.allergens.map(esc).join(', ')}</div>`
+      : `<div class="lb-big" style="font-size:25px">None</div><div class="lb-text">This item is free from the 14 declarable allergens.</div>`));
+  }
+  if(opts.price) cards.push(lbCard('price','Selling price',
+    `<div class="lb-big">${money(r.price)}</div><div class="lb-small">Per serving</div>`));
+  if(opts.cost) cards.push(lbCard('cost','Cost',
+    `<div class="lb-big">${money(c.cost)}</div><div class="lb-small">Per serving</div>`));
+  if(opts.gp) cards.push(lbCard('gp','GP (gross profit)',
+    `<div class="lb-big">${num(g.pct,0)}%</div><div class="lb-small">${ok?'High profitability':'Below '+S.settings.targetGP+'% target'}</div>`));
+  if(opts.calories) cards.push(lbCard('cal','Calories',
+    `<div class="lb-big">${num(c.kcal)} kcal</div><div class="lb-small">Per serving · adults need ~2000 kcal a day</div>`));
+  if(opts.units&&isBev(r)&&c.units) cards.push(lbCard('units','Alcohol units',
+    `<div class="lb-big">${num(c.units,1)}</div><div class="lb-small">Per serve</div>`));
+  const photo=opts.photo
+    ? `<div class="lb-photo">${r.photo?`<img src="${r.photo}" alt="">`:`<div class="ph-init"><span>${esc(initials)}</span></div>`}</div>`:'';
+  const tag=(opts.outlet||opts.category)
+    ? `<div class="lb-tagline"><div class="ring">${LB_ICO.leaf}</div><div>
+        ${opts.outlet?`<b>${esc(r.outlet)}</b>`:''}
+        <span>Hyde &amp; Seek${opts.category?' · '+esc(isBev(r)?(r.bevCat||'Beverage'):'Food'):''}</span></div></div>`:'';
+  const desc=(opts.description&&r.desc)?`<p class="lb-desc">${esc(r.desc)}</p>`:'';
+  return `<div class="lb-cols">
+      <div class="lb-left">
+        <h1 class="lb-title">${esc(r.name)}</h1>
+        <div class="lb-divider"></div>
+        ${desc}${photo}${tag}
+      </div>
+      <div class="lb-right">${cards.join('')}</div>
     </div>
-    <div class="lbfoot"><span>${opts.calories?'Adults need around 2000 kcal a day.':''}</span>
-      <span>Hyde &amp; Seek · ${new Date().toLocaleDateString('en-GB')}</span></div>`;
+    <div class="lb-footer"><span>Hyde &amp; Seek · Menu collection</span><span class="rule"></span><span>${new Date().toLocaleDateString('en-GB')}</span></div>`;
 }
 function buildCover(count){
-  return `<div class="lbtop"><div class="hotel">HYDE &amp; SEEK</div></div>
-    <div class="pad" style="display:flex;flex-direction:column;justify-content:center;flex:1">
-      <div style="font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:#6b7780;font-weight:700">Menu Lookbook</div>
-      <h1 style="font-family:'Aqua Grotesque','Space Grotesk',sans-serif;font-weight:400;letter-spacing:.04em;font-size:60px;color:#16263a;margin:14px 0 0;line-height:1.05">Food &amp; Beverage</h1>
-      <p style="font-size:15px;color:#33414d;max-width:72%;margin-top:18px;line-height:1.6">${count} item${count===1?'':'s'} across all outlets. Generated ${new Date().toLocaleDateString('en-GB')}.</p>
+  return `<div class="lb-cover">
+    <div class="lb-label" style="font-size:12px">Hyde &amp; Seek</div>
+    <div style="margin:auto 0">
+      <div class="lb-label">Menu collection</div>
+      <h1 class="lb-title" style="font-size:76px;margin:18px 0 24px">Food &amp;<br>Beverage</h1>
+      <div class="lb-divider"></div>
+      <p class="lb-desc">${count} item${count===1?'':'s'} across all outlets · Generated ${new Date().toLocaleDateString('en-GB')}</p>
     </div>
-    <div class="lbfoot"><span></span><span>Hyde &amp; Seek</span></div>`;
+    <div class="lb-footer"><span>Seasonal menu collection</span><span class="rule"></span><span>${new Date().toLocaleDateString('en-GB')}</span></div>
+  </div>`;
 }
 async function generateLookbookPDF(){
   const list=lookList();
