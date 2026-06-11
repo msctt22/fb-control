@@ -1,9 +1,12 @@
 # Changelog
 
 ## 0.2.0 — redesign + cloud sync
-- Visual overhaul: abstract gradient backdrop, frosted-glass panels and floating
-  pill navigation, rounded corners throughout, gradient buttons, dark header
-  with glow accents. Focus rings and reduced-motion support.
+- Visual overhaul: liquid-glass interface — high-transparency panels with
+  specular edges, heavy blur/saturation, animated organic blobs behind the UI,
+  floating pill navigation, rounded corners throughout. Focus rings and
+  reduced-motion support.
+- Typography: Aqua Grotesque for headlines, Roboto Slab (thin weights) for
+  body text; JetBrains Mono retained for figures.
 - Cloud persistence on Supabase (project `goshumgotgrholkacrpa`): every change
   saves to a shared team database; open windows sync live via realtime.
 - Team sign-in with emailed magic links (no passwords). Only emails added in
